@@ -25,11 +25,13 @@ async function getMultiple(page = 1) {
 
 
 async function create(programmingLanguage) {
+
+
     const result = await db.query(
         `INSERT INTO programming_languages 
-      (name, released_year, github_rank, pypl_rank, tiobe_rank) 
+      (name, image, released_year, github_rank, pypl_rank, tiobe_rank) 
       VALUES 
-      ("${programmingLanguage.name}","${programmingLanguage.released_year}", "${programmingLanguage.github_rank}", "${programmingLanguage.pypl_rank}", "${programmingLanguage.tiobe_rank}")`
+      ("${programmingLanguage.name}","${programmingLanguage.image}","${programmingLanguage.released_year}", "${programmingLanguage.github_rank}", "${programmingLanguage.pypl_rank}", "${programmingLanguage.tiobe_rank}")`
     );
 
 

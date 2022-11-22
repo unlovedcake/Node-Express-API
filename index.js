@@ -2,14 +2,14 @@
 
 const express = require("express");
 const app = express();
-//const bp = require('body-parser');
+
+const path = require('path');
+const fileUpload = require('express-fileupload');
+
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
 
 const port = 3000;
 
-
-// app.use(bp.json());
-// app.use(bp.urlencoded({ extended: true }));
 
 
 
@@ -19,6 +19,11 @@ app.use(
         extended: true,
     })
 );
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(fileUpload());
 
 app.get("/", (req, res) => {
     res.json({ message: "ok" });

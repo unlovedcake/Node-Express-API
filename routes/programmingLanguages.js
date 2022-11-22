@@ -16,6 +16,39 @@ router.get('/all', async function (req, res, next) {
 router.post('/programming-languages/create', async function (req, res, next) {
     try {
 
+        req.body.image = "Image Empty";
+
+        if (req.files != null) {
+            var file = req.files.image;
+            var img_name = file.name;
+
+            console.log(`Image`, img_name);
+
+            req.body.image = img_name;
+
+            console.log(`Image`, req.body.image);
+
+            // if (!req.files)
+            //     return res.status(400).send('No files were uploaded.');
+
+
+            if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
+
+                file.mv('public/images/' + file.name, function (err) {
+
+                    if (err)
+                        //return res.status(500).send(err);
+
+                        res
+                            .status(401)
+                            .json({ message: "Error Image Upload ", status: "401" });
+                }
+                )
+            }
+        }
+
+
+
 
         res.json(await programmingLanguages.create(req.body));
         console.log(`Save`, req.body);
